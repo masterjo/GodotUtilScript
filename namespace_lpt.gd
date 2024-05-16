@@ -1,5 +1,5 @@
 
-# ���ӽ����̽� lpt  
+# namespace lpt  
 class_name lpt
 
 #region  Coroutine 
