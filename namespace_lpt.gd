@@ -1,5 +1,5 @@
 
-# ³×ÀÓ½ºÆäÀÌ½º lpt  
+# ï¿½ï¿½ï¿½Ó½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ lpt  
 class_name lpt
 
 #region  Coroutine 
@@ -16,6 +16,9 @@ class CoroutineMgr:
 				_coroutineList.erase(iter)	 
 			else:
 				co.resume()			
+	static func clear():
+		for iter in _coroutineList.get_iterator():
+			_coroutineList.erase(iter)	 	
 
 class _EndChecker extends RefCounted:
 	var co : Coroutine
@@ -51,7 +54,7 @@ class LinkedList extends RefCounted:
 	
 	func is_empty():
 		return head == null
-# ¸®½ºÆ®ÀÇ ³¡¿¡ »õ ³ëµå Ãß°¡
+# ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 	func push_back(data):
 		var new_node = _ListNode.new(data)
 		new_node.parent = self
@@ -64,7 +67,7 @@ class LinkedList extends RefCounted:
 			new_node.prev_node = tail
 			tail = new_node
 		
-# Æ¯Á¤ ³ëµå¸¦ Á÷Á¢ »èÁ¦
+# Æ¯ï¿½ï¿½ ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	func erase(node : _ListNode):
 		if node == null:
 			return	
@@ -74,13 +77,13 @@ class LinkedList extends RefCounted:
 		node.parent = null
 		node.data = null
 
-		# ³ëµå°¡ ¸®½ºÆ®ÀÇ Ã¹ ¹øÂ° ³ëµåÀÎ °æ¿ì
+		# ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã¹ ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		if node.prev_node == null:
 			head = node.next_node
 		else:
 			node.prev_node.next_node = node.next_node
 		
-		# ³ëµå°¡ ¸®½ºÆ®ÀÇ ¸¶Áö¸· ³ëµåÀÎ °æ¿ì
+		# ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		if node.next_node == null:
 			tail = node.prev_node
 		else:
