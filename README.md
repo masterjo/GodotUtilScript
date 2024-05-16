@@ -3,7 +3,7 @@ Starting with Godot 4.0, coroutines cannot be controlled directly from GDScript.
 I had no choice but to write a library using await and signals like yield and resume.
 
 example:
-
+```python
 class MyCoroutine extends lpt.Coroutine:
 	func run(arg,_myEnd := _EndChecker.new(self)):
 		print("start = id : "  + str(arg))
@@ -34,3 +34,4 @@ var co = MyCoroutine.new()
 	lpt.CoroutineMgr.run()
 	lpt.CoroutineMgr.run()
 	
+'''
