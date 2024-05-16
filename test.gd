@@ -1,4 +1,4 @@
-extends RefCounted
+class_name MyTest extends RefCounted
 		
 
 class MyCoroutine extends lpt.Coroutine:

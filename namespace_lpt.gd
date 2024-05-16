@@ -15,20 +15,24 @@ class CoroutineMgr:
 			if co.isEnd:
 				_coroutineList.erase(iter)	 
 			else:
-				co.resume()			
+				co.resume()		
+	
 	static func clear():
 		for iter in _coroutineList.get_iterator():
 			_coroutineList.erase(iter)	 	
 
-class _EndChecker extends RefCounted:
-	var co : Coroutine
-	func _init(arg : Coroutine):
-		self.co = arg		
-	func _notification(what):
-		if what == NOTIFICATION_PREDELETE:
-			co.isEnd = true
 	
 class Coroutine extends RefCounted:
+#######################################################	
+	class _EndChecker extends RefCounted:
+		var _co : Coroutine
+		func _init(arg : Coroutine):
+			self._co = arg		
+		func _notification(what):
+			if what == NOTIFICATION_PREDELETE:
+				_co.isEnd = true
+######################################################	
+
 	signal _S_Tick	
 	var isEnd = false
 	
@@ -54,7 +58,7 @@ class LinkedList extends RefCounted:
 	
 	func is_empty():
 		return head == null
-# ����Ʈ�� ���� �� ��� �߰�
+# 리스트의 끝에 새 노드 추가
 	func push_back(data):
 		var new_node = _ListNode.new(data)
 		new_node.parent = self
@@ -67,7 +71,7 @@ class LinkedList extends RefCounted:
 			new_node.prev_node = tail
 			tail = new_node
 		
-# Ư�� ��带 ���� ����
+# 특정 노드를 직접 삭제
 	func erase(node : _ListNode):
 		if node == null:
 			return	
@@ -77,13 +81,13 @@ class LinkedList extends RefCounted:
 		node.parent = null
 		node.data = null
 
-		# ��尡 ����Ʈ�� ù ��° ����� ���
+		# 노드가 리스트의 첫 번째 노드인 경우
 		if node.prev_node == null:
 			head = node.next_node
 		else:
 			node.prev_node.next_node = node.next_node
 		
-		# ��尡 ����Ʈ�� ������ ����� ���
+		# 노드가 리스트의 마지막 노드인 경우
 		if node.next_node == null:
 			tail = node.prev_node
 		else:
