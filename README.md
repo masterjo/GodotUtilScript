@@ -14,7 +14,10 @@ class MyCoroutine extends lpt.Coroutine:
 		await _S_Tick
 		print("end  = id : "  + str(arg))
 
-var co = MyCoroutine.new()	
+
+
+func test():
+	var co = MyCoroutine.new()	
 	var co1 = MyCoroutine.new()	
 
 	lpt.CoroutineMgr.create(co,11)
